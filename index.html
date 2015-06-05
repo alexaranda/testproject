@@ -2,8 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Test Site</title>
-</head>
+<title>Air To The Soul</title>
+    
+<meta name="description" content="Interactive Work Of Alex Aranda"/>
+<meta name="robots" content="index,follow" />
+ </head>
 
 <body>
 
@@ -15,7 +18,20 @@
     </ul>
 </nav>
 
-<div> New DIv</div>
+<div id="myDiv"> New DIv</div>
+<div id="add">This Adds</div>    
+    
+<script>
+    var x = 5;
+    var y = 5;
+    var z = x * y;
+    document.getElementById("myDiv").innerHTML = z;
+    
+    var m = 5 + 2 + 7;
+    document.getElementById("add").innerHTML = m;
+    
+    
+</script>    
 
 </body>
 </html>
