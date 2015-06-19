@@ -1,0 +1,36 @@
+/* Scss Document */
+
+$primary-color: rgb(125, 5, 120);
+$seconday-color: rgb(193, 28, 148);
+
+* { margin:0; padding:0; } /* to remove the top and left whitespace */
+html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
+
+
+body {
+
+}
+
+
+nav {
+	 background-color: $primary-color;
+
+	ul {
+			width: 25%;
+			background: red;
+
+			li {
+				background: yellow;
+				padding: .2em;
+				margin: .1em;
+			}
+	}
+}
+
+
+canvas { display:block; } /* To remove the scrollbars */
+
+/* to show the canvas bounds */
+canvas {
+    background: transparentize($seconday-color, 0);;
+}

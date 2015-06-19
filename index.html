@@ -3,35 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <title>Air To The Soul</title>
-    
+
 <meta name="description" content="Interactive Work Of Alex Aranda"/>
 <meta name="robots" content="index,follow" />
- </head>
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
 
 <body>
 
-<nav>
-    <ul class="mainNav">
-        <li><a href="#" class="home">Home</a></li>
-        <li><a href="#" class="about">About</a></li>
-        <li><a href="#" class="work">Work</a></li>
-    </ul>
-</nav>
 
-<div id="myDiv"> New DIv</div>
-<div id="add">This Adds</div>    
-    
+  <canvas id="canvasContainer">
+
+
+  </canvas>
+
+
+
+
+
+
 <script>
-    var x = 5;
-    var y = 5;
-    var z = x * y;
-    document.getElementById("myDiv").innerHTML = z;
-    
-    var m = 5 + 2 + 7;
-    document.getElementById("add").innerHTML = m;
-    
-    
-</script>    
+
+
+    (function() {
+        var canvas = document.getElementById('canvasContainer'),
+                context = canvas.getContext('2d');
+
+        // resize the canvas to fill browser window dynamically
+        window.addEventListener('resize', resizeCanvas, false);
+
+        function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                /**
+                 * Your drawings need to be inside this function otherwise they will be reset when
+                 * you resize the browser window and the canvas goes will be cleared.
+                 */
+                drawStuff();
+        }
+        resizeCanvas();
+
+
+
+        function drawStuff() {
+                // do your drawing stuff here
+
+
+
+        }
+})();
+
+
+var source = new Image();
+source.src = '../images/moon.svg';
+source.width = '100';
+source.height = '100';
+
+
+// Set up our canvas on the page before doing anything.
+var myCanvas = document.createElement('canvas');
+myCanvas.width = 640;
+myCanvas.height = 480;
+document.getElementsByTagName('body') [0].appendChild(myCanvas);
+
+// Get drawing context for the Canvas
+var myCanvasContext = myCanvas.getContext('2d');
+
+// Load up our image.
+var source = new Image();
+source.src = '../images/moon.svg';
+source.width = '100';
+source.height = '100';
+// Render our SVG image to the canvas once it loads.
+source.onload = function(){
+    myCanvasContext.drawImage(source,0,0);
+}
+
+
+
+
+
+</script>
 
 </body>
 </html>
