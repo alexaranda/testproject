@@ -6,85 +6,113 @@
 
 <meta name="description" content="Interactive Work Of Alex Aranda"/>
 <meta name="robots" content="index,follow" />
-<link rel="stylesheet" href="css/styles.css">
+<script src="js/game.js" charset="utf-8"></script>
+<script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+<script language="javascript" src="js/jquery.hotkeys.js" type="text/javascript"></script>
+<script language="javascript" src="js/key_status.js" type="text/javascript"></script>
+
+
+
+ <style media="screen">
+ canvas { background-color: green;}
+
+ </style>
 
 </head>
 
 <body>
 
 
-  <canvas id="canvasContainer">
+
+<script type="text/javascript">
+
+    var CANVAS_WIDTH = 480;
+    var CANVAS_HEIGHT = 320;
+
+    var canvasElement = $("<canvas width='" + CANVAS_WIDTH + "' height='" + CANVAS_HEIGHT + "'></canvas>");
+    var canvas = canvasElement.get(0).getContext("2d");
+    canvasElement.appendTo('body');
+
+    var FPS = 30;
+    setInterval(function() {
+      update();
+      draw();
+    }, 1000/FPS);
+
+    var textX = 50;
+    var textY = 50;
+
+    function update() {
+      textX +=1;
+      textY +=1;
+   }
+
+    function draw() {
+      canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      canvas.fillStyle = "#000"; // Set Color to black
+      canvas.fillText ("Sup Bro", textX, textY);
+      player.draw();
+    }
 
 
-  </canvas>
+    var player = {
+      color: '#00A',
+      x:220,
+      y:270,
+      width: 32,
+      height: 32,
+      draw: function() {
+        canvas.fillStyle = this.color;
+        canvas.fillRect(this.x, this.y, this.width, this.height);
+      }
+  };
 
+    function update(){
+      if  (keydown.left){
+        player.x -= 5;
+      }
+      if (keydown.right) {
+        player.x +=5;
+      }
+       player.x = player.x.clamp(0, CANVAS_WIDTH - player.width);
+    }
 
+    player.shoot = function() {
+      console.log ("Pew Pew");
 
+    };
 
+    var playerBullets = [];
+    function Bullet(I) {
 
+          I.active = true;
 
-<script>
+          I.xVelocity = 0;
+          I.xVelocity = -I.speed;
+          I.width = 3;
+          I.height = 3;
+          I.color = "#000";
 
+          I.inBounds = function(){
+            return I.x >= 0 && I.x <= CANVAS_WIDTH &&
+            I.y >= 0 && I.y <= CANVAS_HEIGHT;
+           };
 
-    (function() {
-        var canvas = document.getElementById('canvasContainer'),
-                context = canvas.getContext('2d');
+          I.draw = function() {
+            canvas.fillStyle = this.color;
+            canvas.fillRect(this.x, this.y, this.width, this.height);
+           };
 
-        // resize the canvas to fill browser window dynamically
-        window.addEventListener('resize', resizeCanvas, false);
+           I.update = function() {
+             I.x += I.xVelocity;
+             I.y += I.yVelocity;
 
-        function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+             I.active = I.active && I.inBounds();
+           };
 
-                /**
-                 * Your drawings need to be inside this function otherwise they will be reset when
-                 * you resize the browser window and the canvas goes will be cleared.
-                 */
-                drawStuff();
-        }
-        resizeCanvas();
+           return I;
 
-
-
-        function drawStuff() {
-                // do your drawing stuff here
-
-
-
-        }
-})();
-
-
-var source = new Image();
-source.src = '../images/moon.svg';
-source.width = '100';
-source.height = '100';
-
-
-// Set up our canvas on the page before doing anything.
-var myCanvas = document.createElement('canvas');
-myCanvas.width = 640;
-myCanvas.height = 480;
-document.getElementsByTagName('body') [0].appendChild(myCanvas);
-
-// Get drawing context for the Canvas
-var myCanvasContext = myCanvas.getContext('2d');
-
-// Load up our image.
-var source = new Image();
-source.src = '../images/moon.svg';
-source.width = '100';
-source.height = '100';
-// Render our SVG image to the canvas once it loads.
-source.onload = function(){
-    myCanvasContext.drawImage(source,0,0);
-}
-
-
-
-
-
+    }
 </script>
 
 </body>
